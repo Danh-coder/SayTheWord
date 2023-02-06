@@ -9,8 +9,9 @@ function addtext() {
     }
 
     $('.img-to-edit').append(`
-        <div class="textbox" tabindex="0" ondblclick="$('input').trigger('select')">
-            <input type="text" name="" id="" value="Add text here!">                            
+        <div class="textbox" tabindex="0">
+            <textarea name="text" placeholder="Add text here!" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+            <div class="cover"></div>
         </div>
     `)
 
@@ -19,29 +20,40 @@ function addtext() {
     focus(elmnt)
     dragElement(elmnt)
     addDoubleClickEvent(elmnt)
-    addResizeInput()
+    addBlurEvent(elmnt)
+    resizeTextbox(elmnt)
 }
 
 function focus(elmnt) {
     elmnt.focus()
 }
-function stopFocus(elmt) {
-    elmt.blur()
+function stopFocus(elmnt) {
+    elmnt.blur()
 }
 function addDoubleClickEvent(elmnt) {
-    elmnt.addEventListener('dblclick', (event) => {
-        focus(elmnt.children[0])
+    cover = elmnt.children[1]
+    cover.addEventListener('dblclick', (event) => {
+        [textarea, cover] = event.target.parentElement.children;
+        focus(textarea)
+        cover.style.display = "none"
     });
 }
 
-function resizeInput() {
-    $(this).attr('size', $(this).val().length);
+function resizeTextbox(elmnt) {
+    new ResizeObserver(() => {
+        textarea = elmnt.children[0]
+        textarea.style.height = ""
+        textarea.style.height = textarea.scrollHeight + "px"
+    }).observe(elmnt.children[0])
 }
 
-function addResizeInput() {
-    $('input')
-        // event handler
-        .keyup(resizeInput)
-        // resize on page load
-        .each(resizeInput);
+function addBlurEvent(elmnt) {
+    textarea = elmnt.children[0]
+    textarea.addEventListener('blur', (e) => {
+        textbox = e.target.parentElement
+        cover = textbox.children[1]
+
+        cover.style.display = "block"
+        focus(textbox)
+    })
 }

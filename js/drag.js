@@ -1,11 +1,12 @@
 function dragElement(elmnt) {
     console.log(elmnt);
+    cover = elmnt.children[1]
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    elmnt.children[0].onmousedown = dragMouseDown;
+    cover.onmousedown = dragMouseDown;
 
   function dragMouseDown(e) {
     focus(elmnt)
-    
+
     e = e || window.event;
     e.preventDefault();
     // get the mouse cursor position at startup:
@@ -35,5 +36,7 @@ function dragElement(elmnt) {
     // stop moving when mouse button is released:
     document.onmouseup = null;
     document.onmousemove = null;
+
+    focus(elmnt)
   }
 }
