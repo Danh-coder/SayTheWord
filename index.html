@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/49b0e75428.js" crossorigin="anonymous"></script>
+    <!-- Include stylesheet -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <title>Say The Word</title>
 </head>
 <body>
@@ -36,9 +36,9 @@
                             Add Text
                         </button>
                     </div>
-                    <div class="container p-3 flex-column justify-content-center" style="display: block;">
-                        <h4 class="d-flex">Text properties</h4>
-                        <div class="text-menu d-flex flex-column">
+                    <div class="text-properties container p-3 flex-grow-1 flex-column justify-content-center" style="display: block;">
+                        <h4>Text properties</h4>
+                        <!-- <div class="text-menu d-flex flex-column">
                             <div class="d-grid gap-2 dropdown my-2">
                                 <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
                                     Choose font
@@ -53,7 +53,7 @@
                                     <input type="number" class="form-control bg-dark text-light" name="font-size" id="">
                                 </div>
                                 <div class="col-auto">
-                                    <input type="color" class="form-control form-control-color bg-dark" value="#563d7c" name="font-size" id="">
+                                    <input type="color" class="form-control form-control-color bg-dark ql-color" value="#563d7c" name="font-size" id="">
                                 </div>
                             </div>
                             <div class="my-2 row">
@@ -93,21 +93,20 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+                        <div class="editor-container">
+
+                        </div>                        
                     </div>
                 </div>
             </div>
             <div class="col-9 p-0 flex-grow-1">
                 <div class="d-flex align-items-center justify-content-center" style="height: 75vh; background-color: #03001C;">
                     <div class="img-to-edit">
-                        <!-- <div class="textbox" tabindex="0" ondblclick="$('input').trigger('select');">
-                            <input type="text" name="" id="" value="Hello!">                            
-                        </div> -->
                         <!-- <div class="textbox" tabindex="0">
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Add text here!"></textarea>  
                             <div class="cover"></div>
+                            <p>Add text here!</p>
                         </div> -->
-                        <!-- <textarea name="text" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea> -->
                     </div>
                 </div>
             </div>
@@ -121,9 +120,15 @@
             </ul>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/49b0e75428.js" crossorigin="anonymous"></script> 
+    <script src="js/drag.js"></script>
+    <script src="js/unsplash.js"></script>
+    <script src="js/textbox.js"></script>
+    <!-- Include the Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="js/quill.js"></script>
 </body>
-<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-<script src="js/unsplash.js"></script>
-<script src="js/text.js"></script>
-<script src="js/drag.js"></script>
 </html>

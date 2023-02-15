@@ -1,11 +1,12 @@
 function dragElement(elmnt) {
     console.log(elmnt);
-    cover = elmnt.children[1]
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    cover = elmnt.children[0]
+    console.log(cover);
     cover.onmousedown = dragMouseDown;
 
   function dragMouseDown(e) {
-    focus(elmnt)
+    aboutToEdit(elmnt)
 
     e = e || window.event;
     e.preventDefault();
@@ -18,7 +19,7 @@ function dragElement(elmnt) {
   }
 
   function elementDrag(e) {
-    stopFocus(elmnt)
+    // stopFocus(elmnt)
 
     e = e || window.event;
     e.preventDefault();
