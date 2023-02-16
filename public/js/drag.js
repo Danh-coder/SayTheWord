@@ -19,8 +19,6 @@ function dragElement(elmnt) {
   }
 
   function elementDrag(e) {
-    // stopFocus(elmnt)
-
     e = e || window.event;
     e.preventDefault();
     // calculate the new cursor position:
@@ -37,7 +35,5 @@ function dragElement(elmnt) {
     // stop moving when mouse button is released:
     document.onmouseup = null;
     document.onmousemove = null;
-
-    focus(elmnt)
   }
 }
