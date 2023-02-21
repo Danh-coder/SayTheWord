@@ -12,6 +12,10 @@
     position: relative;
 }
 
+.input-btn {
+    display: none;
+}
+
 /* ------------------------TEXTBOX------------------ */
 
 .textbox{
