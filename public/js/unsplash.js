@@ -12,9 +12,9 @@ fetch('https://api.unsplash.com/photos/?client_id=vLB36IXFr-ABmTOKpUEw9F6_aJkV-j
     }
 });
 
-function showImage(url) {
+const showImage = (url) => {
     $('.img-to-edit').empty()
     $('.img-to-edit').append(`
-        <img src="${url}" alt="" srcset="" style="height: 70vh;">
+        <img src="${url}" alt="" srcset="" style="height: auto; max-height: 80vh; max-width: 100%; display: block; margin: auto">
     `)
 }

@@ -1,5 +1,3 @@
-var sourceTextbox = undefined
-
 var toolbarOptions = [
     [{ 'header': [1, 2, 3, 4, 5, 6, false] }, { 'font': [] }],
     ['bold', 'italic', 'underline'],        // toggled buttons
@@ -13,7 +11,7 @@ var quill = new Quill('.editor-container', {
     theme: 'snow'
 });
 
-quill.on('text-change', function(delta, oldDelta, source) {
+quill.on('text-change', (delta, oldDelta, source) => {
     emptyTextbox(sourceTextbox)
     document.querySelector('.ql-editor').childNodes.forEach((elmnt) => {
         clone = elmnt.cloneNode(true)
@@ -23,38 +21,41 @@ quill.on('text-change', function(delta, oldDelta, source) {
     addTextboxEvents(sourceTextbox)
 });
 
-function focusEditor() {
+const focusEditor = () => {
     quill.focus()
 }
 
-function enableEditor() {
+const enableEditor = () => {
     quill.enable()
     document.querySelector('.text-properties').style.opacity = 1
+    setTimeout(() => {
+        document.querySelector('.delete-text-btn').disabled = false
+    }, 100);
 }
 
-function disableEditor() {
+const disableEditor = () => {
     quill.enable(false)
     document.querySelector('.text-properties').style.opacity = 0.4
+    setTimeout(() => { //Wait for executing the deleteTextbox function is done
+        document.querySelector('.delete-text-btn').disabled = true
+    }, 100);
 }
 
-function EditorFocus() {
-    return document.activeElement.className.includes('ql')
-}
+const EditorFocus = () => document.activeElement.className.includes('ql')
 
-function emptyEditor() {
+const emptyEditor = () => {
     document.querySelector('.ql-editor').innerHTML = ''
 }
 
-function insertContents(elmnt) {
+const insertContents = (elmnt) => {
     document.querySelector('.ql-editor').appendChild(elmnt)
 }
 
-function monitorEditorFocus() {
+const monitorEditorFocus = () => {
     Object.keys(window).forEach(key => {
         if (/^on/.test(key)) {
             window.addEventListener(key.slice(2), event => {
-                if (!EditorFocus() && !atLeastOneTextboxFocus()) {
-                    console.log(atLeastOneTextboxFocus());
+                if (!EditorFocus() && !activeTextbox()) {
                     disableEditor()
                     emptyEditor()
                 }

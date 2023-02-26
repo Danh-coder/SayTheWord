@@ -10,6 +10,7 @@
 
 .img-to-edit{
     position: relative;
+    max-width: 95%;
 }
 
 .input-btn {
@@ -45,6 +46,8 @@
     width: 100%;
     height: 100%;
     background-color: red;
+    
+    touch-action: none; /* Avoid scrolling after triggering touch events */
 }
 
 /* ------------------------RICH TEXT EDITOR------------------ */
@@ -54,7 +57,7 @@
 }
 
 .editor-container{
-    height: 50vh !important;
+    height: 60px !important;
 }
 .editor-container .ql-editor{
     overflow-y: auto;

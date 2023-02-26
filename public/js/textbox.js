@@ -1,8 +1,9 @@
-function isEmpty(classname) {
-    return !document.getElementsByClassName(classname)[0].childElementCount
-}
+var touchTimeStamp = new Date().getTime()
+var sourceTextbox = undefined
 
-function addtext() {
+const isEmpty = (classname) => !document.getElementsByClassName(classname)[0].childElementCount
+
+const addtext = () => {
     if (isEmpty('img-to-edit')) {
         alert('Upload an image first')
         return
@@ -20,55 +21,50 @@ function addtext() {
     addTextboxEvents(elmnt)
 }
 
-function atLeastOneTextboxFocus() {
+const activeTextbox = () => {
     textboxes = document.querySelectorAll('.textbox')
-    return Array.from(textboxes).filter(textbox => document.activeElement === textbox).length;
+    return Array.from(textboxes).filter(textbox => document.activeElement === textbox)[0]
 }
 
-function focus(elmnt) {
+const focus = (elmnt) => {
     elmnt.focus()
 }
-function stopFocus(elmnt) {
+const stopFocus = (elmnt) => {
     elmnt.blur()
 }
 
-function addTextboxEvents(elmnt) {
+const addTextboxEvents = (elmnt) => {
     dragElement(elmnt)
     addDoubleClickEvent(elmnt)
     addFocusEvent(elmnt)
 }
 
-function addDoubleClickEvent(elmnt) {
+const addDoubleClickEvent = (elmnt) => {
+    // Mobile devices do not have doubleclick event ==> Use click event instead
     cover = elmnt.children[0]
-    cover.addEventListener('dblclick', (event) => {
-        enableEditor()
-        focusEditor()
-    });
-}
-
-function addFocusEvent(elmnt) {
-    elmnt.addEventListener('focus', (e) => {
-        console.log('SourceTextbox', elmnt);
-        sourceTextbox = elmnt
+    cover.addEventListener('click', (e) => {
+        if ((new Date().getTime() - touchTimeStamp) < 500) focusEditor()
+        touchTimeStamp = new Date().getTime();
     })
 }
 
-function emptyTextbox(textbox) {
-    textbox.innerHTML = "<div class='cover'></div>"
+const addFocusEvent = (elmnt) => {
+    elmnt.addEventListener('focus', (e) => sourceTextbox = elmnt)
 }
 
-function appendChild(textbox, elmnt) {
-    textbox.appendChild(elmnt)
-}
+const emptyTextbox = (textbox) => textbox.innerHTML = "<div class='cover'></div>"
 
-function aboutToEdit(textbox) {
+const appendChild = (textbox, elmnt) => textbox.appendChild(elmnt)
+
+const aboutToEdit = (textbox) => {
     focus(textbox)
+    enableEditor()
 
     // Insert contents to the editor
     insertContentsToEditor(textbox)
 }
 
-function insertContentsToEditor(textbox) {
+const insertContentsToEditor = (textbox) => {
     emptyEditor()
     for (let index = 1; index < textbox.children.length; index++) {
         const elmnt = textbox.children[index];
@@ -77,4 +73,4 @@ function insertContentsToEditor(textbox) {
     }
 }
 
-// addTextboxEvents(document.querySelector('.textbox'))
+const deleteTextbox = () => sourceTextbox.remove()
